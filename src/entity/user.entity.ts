@@ -1,4 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn, BaseEntity } from "typeorm";
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  BaseEntity,
+  OneToOne,
+  JoinColumn,
+} from "typeorm";
+import { Wallet } from "./wallet.entity";
 
 @Entity()
 export class User extends BaseEntity {
@@ -10,4 +18,8 @@ export class User extends BaseEntity {
 
   @Column()
   password: string;
+
+  @OneToOne(() => Wallet, { cascade: true, onDelete: "CASCADE" })
+  @JoinColumn()
+  wallet: Wallet;
 }

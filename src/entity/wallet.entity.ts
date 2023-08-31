@@ -1,4 +1,11 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  OneToMany,
+} from "typeorm";
+import { Currency } from "./currency.entity";
 
 @Entity()
 export class Wallet extends BaseEntity {
@@ -8,6 +15,6 @@ export class Wallet extends BaseEntity {
   @Column("float", { precision: 6, scale: 2 })
   balance: number;
 
-  @Column()
-  currency: string;
+  @OneToMany(() => Currency, (currency) => currency.wallet)
+  currencies: Currency[];
 }
